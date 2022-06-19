@@ -19,9 +19,12 @@ Another example is object keys, if the fields and data are in the same order, yo
 - no need to store generative data, just genererate it. (ex: full dates)
 - no need to store extra space/symbols(:"',) or waste time modifying them when editing.
 .
-## When not to use
+## When not to use this
 Use the original data if bellow issues overcome the benefits.
 - the original data structure is already optimal and is what you want.
+- data is modified or stored in realtime and original structure is forced.
+- not much to reduce: no keys, no generated data, one or two columned data(id, val)
+- no matching data patterns, not sequential, not generative, no data order.
 - very complex build function or data structure.
 - possible to make mistakes, error or get wrong output.
 - high processing power makes the original data a better choice.
