@@ -1,6 +1,6 @@
 # CODB
 ### Constructible Objects Data Build
-CODB is a data template model to define structure and store data efficiently.  
+CODB is a customizable data format, a data template model to define new data structure & builder function to store main data without redundant/unneeded information, yet when loading, data be built and exported in the original or preferred state.
 Define a descriptive template to abstract the main data and seperate redundant data, keys, dates... yet build and export the data in original/intended format at loading time.  
 Instructions, descriptions, definitions can be seen in the comments of data.js file.  
 .
