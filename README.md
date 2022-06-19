@@ -1,8 +1,13 @@
 # CODB
 ### Constructible Objects Data Build
-CODB is a customizable data format, a data template model to define new data structure & builder function to store main data without redundant/unneeded information, yet when loading, data be built and exported in the original or preferred state.
-Define a descriptive template to abstract the main data and seperate redundant data, keys, dates... yet build and export the data in original/intended format at loading time.  
-Instructions, descriptions, definitions can be seen in the comments of data.js file.  
+CODB is a customizable data format, a data template model to define new data structure & builder function to store main data without redundant/unwanted information, yet at data export it can be built in the original or preferred state.  
+
+Define a descriptive template to make the main data abstract and seperate from redundant unwanted info, then make builder function to format data and its structure to export it in the preferred intended form. Example: auto generate id, dates, object tree structure, KV...  
+The instructions, descriptions, definitions in the data.js sample file, it auto generate full year dates instead of cluttering the data with it.  
+
+The goal is find a pattern, to reduce something, if id is in a sequence: 1,2,3... so autogenerate it.  
+Another example is object keys, if the fields and data are in the same order, you can remove the keys, for example if id, value fields are all in a sequence, can save data like:  [1, 220, 2, 300, 4, 500...] and later when building object records, assign id and value keys to 2 data in the array, per item.  
+
 .
 ## Benefits
 - reduced data size by multiple times. 
