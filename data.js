@@ -3,16 +3,15 @@
     add only what is needed to describe your data for internal usage.
 */
 
-const  template = { //Capitalized items describes data. (or meta-data)
+const  template = {   // Capitalized items describes data. (or meta-data)
                 Data: {Model: 'raw',  Type: 'float',  Store: 'array'}, // raw or model name
-                Export:  {Name: 'data', Type: 'object'}, //an object named data
-                Build:  true,
-                Format: 'array of objects',
+                Export: {Name: 'data', Type: 'object', Format: 'array of objects'},
+                Build:  year=> build_Data(year), //to describe/call builder function
                 Generate: ['object', 'structure', 'full year date'],
                 Root:   ['time', 'value'], // root items
                 Tree:   ['data.time.*', 'value'],  //Tree Hierarchy
-                // Sub: ['time.x.y.z'] (optional) sub branches of a tree
-
+                // Sub: ['time.x.y.z'] optional (data structure bellow is the same thing)
+    
                 //exported data structure (lowercase items)
                 time: {year: 2018, month: 1, day: 1},
                 value: 1.1  //Raw_Data, type: float values  
@@ -41,8 +40,11 @@ function  build_Data(y) {
           //Record pushed in data array based on template structure
           data.push({time: {year: y, month: m, day: d}, value: n});
     }
-} // console.log(data, Raw_Data.length)
-build_Data(template.time.year);
+}
+// Building the template. 
+// same as using  build_Data(2018)  but from template data/access
+template.Build(template.time.year);
+
 export  default  data;
 
 /*  A good use-case example seen here was a full year date information, per day,
