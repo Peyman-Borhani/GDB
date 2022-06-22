@@ -3,23 +3,27 @@
 //  _template_ describes the model, meta-data and user data
 //  add only what is needed to describe your data for internal usage.
 
-const  template =  //Capitalized items describes internal data.(meta-data)
-            {   Data:   { Is:   'array',    Content: 'raw',
-                          Type: 'float',    Store: 'array',
+const  template = { //Capitalized items describes internal or meta data
+                Data:   { Is:   'array',    Content: 'raw',
+                          Type: 'float',    Store:   'array',
                           Name: 'Raw_Data'
                 },
                 Export: { Is:   'array',    Content: 'JS objects', 
-                          Type: 'object',   Store: 'array',
+                          Type: 'object',   Store:   'array',
                           Name: 'data'
                 },
                 Build:  year=> build_Data(year), //to describe/call builder function
-                Generate:  ['object',  'structure',  'full year date'],
-                Tree: ['time.*',  'value'],  //Tree Hierarchy
-                // Sub: tree branchs (optional, same structure in bellow object)
-    
-                //exported data structure (lowercase items)
-                time: {year: 2018,  month: 1,  day: 1},
-                value: 1.1  // Raw_Data, type: float values  
+
+                Gen:   {  Struct: true,     Items: 'Tree',
+                          Type:  'date',    Info:  'full year date per day'
+                }, // Gen = Genrative
+
+                Tree:   ['time.*',  'value'],  // Tree structure
+                // Sub: tree branchs (optional, same structure in items bellow)
+
+                //exported items data structure (writen in lowercase)
+                time: {year: 2018,  month: 1,  day: 1}, 
+                value: 1.1  // Raw_Data, type: float values 
             }
 
 /*  Raw data consist of main values, simple, minimal data store without 
@@ -36,19 +40,19 @@ const data = [];  //main data to be exported
 const  daysInM = (y,m)=> {return new Date(y, m, 0).getDate()}
 //other date functions: d=new Date(), m=d.getMonth(), y=d.getFullYear();
 
-//Generate dates and format data based on template structure
 function  build_Data(y) {
+//Generate dates and format data based on template structure    
     let  m=0, d=0, dim=0; //dim: number of days in a month
     for (let n of Raw_Data) 
         { d++;
           if(d>dim) { m++;   if(m>12) return; 
                       d=1;   dim = daysInM(y, m) }
-          //Record pushed in data array based on template structure
-          data.push({time: {year: y, month: m, day: d}, value: n});
+          // a record is structured based on template items
+          const record = {time: {year: y,  month: m,  day: d}, value: n}
+          data.push(record); // a record is pushed into data array
     }
 }
-// Building the template. 
-// same as using  build_Data(2018)  but from template data/access
+//Building the template.  executing build_Data(2018) but from template
 template.Build(template.time.year);
 
 export  default  data;
