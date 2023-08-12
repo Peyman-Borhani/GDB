@@ -1,15 +1,68 @@
 # CODB
-### Constructible Objects Data Build
-CODB is a customizable data format, a data template model to define new data structure & builder function to store main data without redundant/unwanted information, yet at data export it can be built in the original or preferred state.  
+### `Constructible Objects Data Build`  
 
-Define a descriptive template to make the main data abstract and seperate from redundant unwanted info, then make builder function to format data and its structure to export it in the preferred intended form. Example: auto generate id, dates, object tree structure, KV...  
-The instructions, descriptions, definitions in the data.js sample file, it auto generate full year dates instead of cluttering the data with it.  
+CODB is a custom or generative data storage pattern.  
+Is mostly a conceptual model, a method of storing data, when you have lots of information that could be generated and constructed instead of being stored, or some data is dynamic/real-time generated.  
+You can customize the example to fit your use-case.  
 
-The goal is find a pattern, to reduce something, if id is in a sequence: 1,2,3... so autogenerate it.  
-Another example is object keys, if the fields and data are in the same order, you can remove the keys, for example if id, value fields are all in a sequence, can save data like:  [1, 220, 2, 300, 4, 500...] and later when building object records, assign id and value keys to 2 data in the array, per item.  
+In general this model consist of 3 concepts: `Template` -- `Raw generator` -- `Build function`
 
+---
+`Template`: used to define data structure and describe the process, functions and meta data.   
+The descriptive template is to define it in a readable pattern. Human/logical/machine readable.   
+
+In this example (data.js file) - The instructions, descriptions defined in the data.js template, and function generates full year dates instead of cluttering the data with it.  
+
+`Raw generator`: flattens the structure, and make raw data, so you don't need to store redundant/unwanted information, such as fields and sequences, years, incremental IDs, etc...,  you must describe the reconstruction process in the template.  
+
+`Build function` once data is to be exported or called(function), it will be reconstructed in the original or intended form, such as object/array/map/DB structure(or whatever described in template), adding data types, keys, fields, ids... and include/embed/refer raw data in it. (loaded/fethed...)  
+for example, generated ids, dates, music notes, AI data in an object/array/map tree structure...  
+
+---
+  
+## `Examples`
+The goal is find a pattern, reduce data into a generative model for storage.
+
+Simple example is for KV stores, if the Key is permanent(Ex: year, month, id) and is a sequence, you can remove the keys, and store raw data in correct order.  
+.  
+
+`Simple example`:
+```
+  // original data:  
+      [{month: 1, price: 220}, {month:2, price:300} ,...] 
+  // instead use:
+      [220, 300, ...]
+  // and later when building object records, reconstruct it:
+      data = raw.map( (n,i)=> { {month: i+1,  price: n}  }
+```
 .
-## Benefits
+  
+`Advanced example`:  
+
+```
+// Use around 10 lines of code:
+classes = [  'Physics', 'Chemistry', 'Math' ] 
+Math = [ 'Ana', '0123543', 'B+',  'Ben', '0142432', 'A', ... ]  
+data = for(n of classes)  Math.map( (x, i)=> {
+                               {  id: i+1,
+                                  classID: n+i+1,
+                                  name: Math[i],
+                                  phone: Math[i+1],
+                                  grade: Math[i+2]  }
+                          }
+                                               
+// instead of 500 lines in original data:
+data = [  { id: 1,  name: 'Ana',  phone: '0123543',  grade: 'B+'} ,
+          { id: 2,  name: 'Ben',  phone: '0142432',  grade: 'A' } ,
+            .
+            .
+            .
+            500 more students means: 500 more data lines
+```
+---  
+.  
+
+## `Benefits`
 - reduced data size by multiple times. 
 - eliminate redundant keys, define once and trace by placement. (ex: 1st id, 2nd name, 3rd value) 
 - eliminate generative predictable data (ex: continuous dates...)
@@ -18,9 +71,11 @@ Another example is object keys, if the fields and data are in the same order, yo
 - if only raw data is needed can edit export line, and just receive it.
 - no need to store generative data, just genererate it. (ex: full dates)
 - no need to store extra space/symbols(:"',) or waste time modifying them when editing.
-.
-## When not to use this
-Use the original data if bellow issues overcome the benefits.
+
+.  
+## `When not to use`  
+
+Use the original data if bellow issues overcome the benefits.  
 - the original data structure is already optimal and is what you want.
 - data is modified or stored in realtime and original structure is forced.
 - not much to reduce: no keys, no generated data, one or two columned data(id, val)
@@ -30,6 +85,7 @@ Use the original data if bellow issues overcome the benefits.
 - high processing power makes the original data a better choice.
 - need to follow specific standards, configurations(json...)
 - pre-defined API/configs or data is shared with other tools/programs.
-.
-## Future
+
+.  
+## `Todo`
 extend to a multiple data toolset, for example tool to prepare, extract, remove specific data, symbols...
