@@ -1,11 +1,10 @@
-# CODB
-### `Constructible Objects Data Build`  
+# GDB
+### `Generative Data Build`  
 
-CODB is a custom or generative data storage pattern.  
-Is mostly a conceptual model, a method of storing data, when you have lots of information that could be generated and constructed instead of being stored, or some data is dynamic/real-time generated.  
-You can customize the example to fit your use-case.  
+GDB is a generative data store or build based on described template.  
+A conceptual data model to generate and store data, where the information could be generated and constructed instead of being stored raw, or data is dynamic and generated in realtime. Anyway, you can customize the example to fit your use-case.  
 
-In general this model consist of 3 concepts: `Template` -- `Raw generator` -- `Build function`
+In general this model consists of 3 concepts: `Template` -- `Raw generator` -- `Build function`
 
 ---
 `Template`: used to define data structure and describe the process, functions and meta data.   
