@@ -1,8 +1,12 @@
 # GDB
 ### `Generative Data Build`  
 
-GDB is a generative data store or build based on described template.  
-A conceptual data model to generate and store data, where the information could be generated and constructed instead of being stored raw, or data is dynamic and generated in realtime. Anyway, you can customize the example to fit your use-case.  
+GDB, A conceptual data model to store data and meta-data, a data structure/store method, to store it raw or compose/generate structured data from raw data + meta-data based on described template.  
+
+You define a declarative template, representing: data's structure, redundant info, meta-data, symbols, format etc.., then process and store raw section of data, yet on access generate/built/formatted into original form.
+
+Extra information could be generated and composed instead of being stored raw, or data is dynamic in generated in realtime.
+So feel free to customize the example to fit your use-case.  
 
 In general this model consists of 3 concepts: `Template` -- `Raw generator` -- `Build function`
 
